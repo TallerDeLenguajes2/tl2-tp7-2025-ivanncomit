@@ -61,12 +61,7 @@ namespace ProductoR
                 {
                     while(reader.Read())
                     {
-                        var producto = new Producto 
-                        (
-                        int.Parse(reader["idProducto"]),
-                        string.Parse(reader["Descripcion"]),
-                        float.Parse(reader["Precio"])
-                        )
+                        var producto = new Producto (reader.GetInt32(0), reader.GetString(1), (float)reader.GetDouble(2));
                         listainicial.Add(producto);
                     }
                 }
@@ -84,12 +79,12 @@ namespace ProductoR
                 var command = new SqliteCommand(consulta, connection);
 
                 command.Parameters.AddWithValue("@idProd", idProducto);
-
+                Producto nuevo = null;
                 using (SqliteDataReader reader = command.ExecuteReader())
                 {
                     while(reader.Read())
                     {
-                        Producto nuevo = (int.Parse(reader["idProducto"]), string.Parse(reader["Descripcion"]), float.Parse(reader["Precio"]))
+                        nuevo = new Producto(reader.GetInt32(0), reader.GetString(1), (float)reader.GetDouble(2));
                     }
                 }
 
@@ -107,9 +102,11 @@ namespace ProductoR
                 var command = new SqliteCommand(consulta, connection);
                 command.Parameters.AddWithValue("@idProd", idProducto);
 
-                command.ExecuteNonQuery();
+                int filas = command.ExecuteNonQuery();
 
                 connection.Close();
+                return filas > 0; 
+
             }
         }
     }
