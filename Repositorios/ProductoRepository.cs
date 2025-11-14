@@ -1,15 +1,3 @@
-/*
-Repositorio de Productos:
-Crear un repositorio llamado ProductoRepository para gestionar todas las
-operaciones relacionadas con Productos. Este repositorio debe incluir métodos para:
-● Crear un nuevo Producto. (recibe un objeto Producto)
-● Modificar un Producto existente. (recibe un Id y un objeto Producto)
-● Listar todos los Productos registrados. (devuelve un List de Producto)
-● Obtener detalles de un Productos por su ID. (recibe un Id y devuelve un
-Producto)
-● Eliminar un Producto por ID
-*/
-
 using ProductoSpace;
 using Microsoft.Data.Sqlite;
 
@@ -35,7 +23,7 @@ namespace ProductoR
         }
         public void ModificarProd(int idProducto, Producto producto)
         {
-            string consulta = "UPDATE Productos SET Descripcion = @NuevaDescripcion ,Precio = @NuevoPrecio WHERE idProducto = @idProd;";
+            string consulta = "UPDATE Productos SET Descripcion = @NuevaDescripcion , Precio = @NuevoPrecio WHERE idProducto = @idProd;";
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 var command = new SqliteCommand(consulta, connection);
