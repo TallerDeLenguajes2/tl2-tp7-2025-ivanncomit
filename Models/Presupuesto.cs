@@ -5,14 +5,15 @@ namespace PresupuestoSpace
     {
         private int IdPresupuesto;
         private string nombreDestinatario;
-        //private date FechaCreacion
+        private date FechaCreacion
         private List<PresupuestoDetalle> detalle;
 
         public Presupuesto(int id, string nombre, List<PresupuestoDetalle> detalles)
         {
             this.IdPresupuesto = id;
             this.nombreDestinatario = nombre;
-            this.detalle = detalles;            
+            this.detalle = detalles;
+            //this.FechaCreacion = 
         }
 
 

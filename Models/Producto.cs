@@ -4,17 +4,17 @@ namespace ProductoSpace
     {
         private int idProducto;
         private string descripcion;
-        private int precio;
+        private float precio;
 
-        public Producto(int id, string desc, int precio)
+        public Producto(int id, string desc, float precio)
         {
             this.idProducto = id;
             this.descripcion = desc;
             this.precio = precio;
         }
 
-        public int IdProducto() => idProducto;
+        public int GetIdProducto() => idProducto;
         public string GetDescripcion() => descripcion;
-        public int Precio() => precio;
+        public float GetPrecio() => precio;
     }
 }
