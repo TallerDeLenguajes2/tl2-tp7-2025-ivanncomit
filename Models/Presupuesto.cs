@@ -3,7 +3,7 @@ namespace PresupuestoSpace
 {
     class Presupuesto
     {
-        private int IdPresupuesto;
+        private int idPresupuesto;
         private string nombreDestinatario;
         private date FechaCreacion
         private List<PresupuestoDetalle> detalle;
@@ -15,6 +15,11 @@ namespace PresupuestoSpace
             this.detalle = detalles;
             //this.FechaCreacion = 
         }
+
+        public int GetIdProducto() => idProducto;
+        public string GetDestinatario() => nombreDestinatario;
+        public date GetFecha() => FechaCreacion;
+
 
 
         public double MontoPresupuesto()

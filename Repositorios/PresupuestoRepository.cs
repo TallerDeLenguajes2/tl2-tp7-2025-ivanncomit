@@ -2,7 +2,6 @@
 Repositorio de Presupuestos:
 Crear un repositorio llamado PresupuestosRepository para gestionar todas las
 operaciones relacionadas con Presupuestos. Este repositorio debe incluir métodos para:
-● Crear un nuevo Presupuesto. (recibe un objeto Presupuesto)
 ● Listar todos los Presupuestos registrados. (devuelve un List de Presupuestos)
 ● Obtener detalles de un Presupuesto por su ID. (recibe un Id y devuelve un
 Presupuesto con sus productos y cantidades)
@@ -19,43 +18,73 @@ namespace PresupuestoR
     public class PresupuestoRepository
     {
         private string connectionString = "Data Source=DB/Tienda.db";
-        void CrearPresupuesto(Presupuesto presupuestoaCrear)
+        //● Crear un nuevo Presupuesto. (recibe un objeto Presupuesto)
+        public void CrearPresupuesto(Presupuesto presupuestoaCrear)
         {
+            string consulta = "INSERT INTO Presupuestos (NombreDestinatario, FechaCreacion) VALUES (@NombreCrear, @FechaCrear)";
+
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
+                var command = new SqliteCommand(consulta, connection)
                 connection.Open();
+                command.Parameters.AddWithValue("@NombreCrear", presupuestoaCrear.GetDestinatario());
+                command.Parameters.AddWithValue("@FechaCrear", presupuestoaCrear.GetFecha());
+                command.ExecuteNonQuery();
                 connection.Close();
             }
         }
-        List<Presupuesto> ListarPresupuestos()
+
+        public List<Presupuesto> ListarPresupuestos()
         {
             string consulta = "SELECT * FROM Presupuestos";
+            List<Presupuesto> listainicial = new List<Presupuesto>();
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
+                var command = new SqliteCommand(consulta, connection);
+
+                using (SqliteDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        var presupuesto = new Presupuesto (reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
+                        listainicial.Add(presupuesto);
+                    }
+                }
+                return listainicial;
+            }
+        }
+        public Presupuesto ObtenerPresupuestoID(int idpresupuesto)
+        {
+            string consulta = "SELECT idPresupuesto, NombreDestinatario , FechaCreacion FROM Presupuestos WHERE idPresupuesto = @idPres;";
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand(consulta, connection);
+                command.Parameters.AddWithValue("@idPres", idpresupuesto);
+                Presupuesto nuevo = null;
+
+                using (SqliteDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        presupuestoObtenido = new Presupuesto(
+                            /*averiguar reader para los detalles*/
+                        )
+                    }
+                }
 
 
 
                 connection.Close();
             }
         }
-        Presupuesto ObtenerPresupuestoID(int idpresupuesto)
+        public void AgregarProdyCantidadID(int idPresupuesto)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
-
-
-
-                connection.Close();
-            }
-        }
-        void AgregarProdyCantidadID(int idPresupuesto)
-        {
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-
+                
 
 
                 connection.Close();
