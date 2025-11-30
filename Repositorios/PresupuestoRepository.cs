@@ -1,23 +1,12 @@
-/*
-Repositorio de Presupuestos:
-Crear un repositorio llamado PresupuestosRepository para gestionar todas las
-operaciones relacionadas con Presupuestos. Este repositorio debe incluir métodos para:
-● Listar todos los Presupuestos registrados. (devuelve un List de Presupuestos)
-● Obtener detalles de un Presupuesto por su ID. (recibe un Id y devuelve un
-Presupuesto con sus productos y cantidades)
-● Agregar un producto y una cantidad a un presupuesto (recibe un Id)
-● Eliminar un Presupuesto por ID
-*/
-
-using PresupuestoSpace;
+using TPTDL2.Models;
 
 using Microsoft.Data.Sqlite;
 
-namespace PresupuestoR
+namespace TPTDL2.Repositorys
 {
     public class PresupuestoRepository
     {
-        private string connectionString = "Data Source=DB/Tienda.db";
+        private string connectionString = "Data Source=tienda.db";
         //● Crear un nuevo Presupuesto. (recibe un objeto Presupuesto)
         public void CrearPresupuesto(Presupuesto presupuestoaCrear)
         {

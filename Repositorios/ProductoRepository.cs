@@ -1,11 +1,11 @@
-using ProductoSpace;
+using TPTDL2.Models;
 using Microsoft.Data.Sqlite;
 
-namespace ProductoR
+namespace TPTDL2.Repositorys
 {
     class ProductoRepository
     {
-        private string connectionString = "Data Source=DB/Tienda.db";
+        private string connectionString = "Data Source=tienda.db";
         public void Alta (Producto productoaCrear)
         {
             string consulta = "INSERT INTO Productos (Descripcion, Precio) VALUES (@Descripcion, @Precio);"; 
@@ -13,8 +13,8 @@ namespace ProductoR
             {
                 var command = new SqliteCommand(consulta, connection);
                 connection.Open();
-                command.Parameters.AddWithValue("@Descripcion", productoaCrear.GetDescripcion());
-                command.Parameters.AddWithValue("@Precio", productoaCrear.GetPrecio());
+                command.Parameters.AddWithValue("@Descripcion", productoaCrear.Descripcion);
+                command.Parameters.AddWithValue("@Precio", productoaCrear.Precio);
 
                 command.ExecuteNonQuery();
 
@@ -49,7 +49,7 @@ namespace ProductoR
                 {
                     while(reader.Read())
                     {
-                        var producto = new Producto (reader.GetInt32(0), reader.GetString(1), (float)reader.GetDouble(2));
+                        var producto = new Producto (reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
                         listainicial.Add(producto);
                     }
                 }
@@ -70,9 +70,9 @@ namespace ProductoR
                 Producto nuevo = null;
                 using (SqliteDataReader reader = command.ExecuteReader())
                 {
-                    while(reader.Read())
+                    if(reader.Read())
                     {
-                        nuevo = new Producto(reader.GetInt32(0), reader.GetString(1), (float)reader.GetDouble(2));
+                        nuevo = new Producto(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
                     }
                 }
 
