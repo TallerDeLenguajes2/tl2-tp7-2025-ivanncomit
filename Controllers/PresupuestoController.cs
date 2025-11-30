@@ -9,46 +9,54 @@ namespace TPTDL2.Controllers
     public class PresupuestosController : ControllerBase
     {
         private PresupuestoRepository presupuestoRepository;
-        
+
         public PresupuestosController()
         {
             presupuestoRepository = new PresupuestoRepository();
         }
 
         [HttpPost("AltaPresupuesto")]
-        ActionResult<string> AltaProducto(Presupuesto nuevoProducto)
+        public ActionResult<string> AltaProducto(Presupuesto nuevoPresupuesto)
         {
-
-            return Ok("");
+            presupuestoRepository.CrearPresupuesto(nuevoPresupuesto);
+            return Ok("Presupuesto creado exitosamente");
         }
 
-        [HttpPost("{id}/AsignarProductoyCantidad")]
-        ActionResult<string> ModificarProducto(Presupuesto nuevoProducto)
+        [HttpPost("{id}/ProductoDetalle")]
+        public ActionResult<string> AgregarProducto(int id, int idProducto, int cantidad)
         {
-
-            return Ok("");
+            presupuestoRepository.AgregarProdyCantidadID(id, idProducto, cantidad);
+            return Ok($"Producto {idProducto} agregado al presupuesto {id} con cantidad {cantidad}");
         }
 
         [HttpGet("ListarPresupuestos")]
-        ActionResult<List<Presupuesto>> GetProductos()
+        public ActionResult<List<Presupuesto>> GetProductos()
         {
+            var lista = presupuestoRepository.ListarPresupuestos();
+            return Ok(lista);
 
-            return Ok();
         }
         [HttpGet("{id}")]
-        ActionResult<List<Presupuesto>> GetDetallesPresupuesto()
-        {
 
-            return Ok();
+        public ActionResult<Presupuesto> GetDetallesPresupuesto()
+        {   
+            var presupuesto = presupuestoRepository.ObtenerPresupuestoID(id);
+            
+            if (presupuesto == null) 
+            {
+                return NotFound("Presupuesto no encontrado");
+            }
+            
+            return Ok(presupuesto);
         }
 
         [HttpDelete("{id}")]
-        ActionResult DeletePresupuesto(int id)
+        public ActionResult DeletePresupuesto(int id)
         {
             bool eliminado = presupuestoRepository.EliminarPresupuestoPorID(id);
             if (eliminado)
             {
-                return NoContent(); // HTTP 204 (Eliminación exitosa)
+                return NoContent();
             }
             else
             {
