@@ -1,7 +1,6 @@
-using ProductoSpace;
-namespace PresupuestoDetalleSpace
+namespace TPTDL2.Models
 {
-    class PresupuestoDetalle
+    public class PresupuestoDetalle
     {
         public Producto Producto { get; set; }
         public int Cantidad { get; set; }

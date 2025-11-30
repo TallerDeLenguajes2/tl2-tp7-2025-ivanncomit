@@ -1,7 +1,7 @@
-using PresupuestoDetalleSpace;
-namespace PresupuestoSpace
+using TPTDL2.Models;
+namespace TPTDL2.Models
 {
-    class Presupuesto
+    public class Presupuesto
     {
         public int IdPresupuesto { get; set; }
         public string NombreDestinatario { get; set; }
