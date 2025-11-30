@@ -14,7 +14,7 @@ namespace TPTDL2.Repositorys
 
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
-                var command = new SqliteCommand(consulta, connection)
+                var command = new SqliteCommand(consulta, connection);
                 connection.Open();
                 command.Parameters.AddWithValue("@NombreCrear", presupuestoaCrear.NombreDestinatario);
                 command.Parameters.AddWithValue("@FechaCrear", presupuestoaCrear.FechaCreacion.ToString("yyyy-MM-dd HH:mm:ss"));
