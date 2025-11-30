@@ -68,9 +68,10 @@ namespace PresupuestoR
                 {
                     while(reader.Read())
                     {
-                        presupuestoObtenido = new Presupuesto(
-                            /*averiguar reader para los detalles*/
-                        )
+                        if(reader.GetInt32(0)==idpresupuesto)
+                        {
+                            presupuestoObtenido = new Presupuesto(reader.GetInt32(0), reader.GetString(1), reader.GetString(2))
+                        }
                     }
                 }
 
