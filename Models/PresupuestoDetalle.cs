@@ -3,22 +3,15 @@ namespace PresupuestoDetalleSpace
 {
     class PresupuestoDetalle
     {
-        private Producto producto;
-        private int cantidad;
+        public Producto Producto { get; set; }
+        public int Cantidad { get; set; }
+
+        public PresupuestoDetalle() { } 
 
         public PresupuestoDetalle(Producto producto, int cantidad)
         {
-            this.producto = producto;
-            this.cantidad = cantidad;
-        }
-
-        public int GetCantidad()
-        {
-            return cantidad;
-        }
-        public Producto GetProducto()
-        {
-            return producto;
+            Producto = producto;
+            Cantidad = cantidad;
         }
     }
 }

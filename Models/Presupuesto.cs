@@ -3,45 +3,50 @@ namespace PresupuestoSpace
 {
     class Presupuesto
     {
-        private int idPresupuesto;
-        private string nombreDestinatario;
-        private date FechaCreacion
-        private List<PresupuestoDetalle> detalle;
+        public int IdPresupuesto { get; set; }
+        public string NombreDestinatario { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public List<PresupuestoDetalle> Detalle { get; set; }
+
+
+        public Presupuesto() 
+        {
+            Detalle = new List<PresupuestoDetalle>();
+        }
 
         public Presupuesto(int id, string nombre, List<PresupuestoDetalle> detalles)
         {
-            this.IdPresupuesto = id;
-            this.nombreDestinatario = nombre;
-            this.detalle = detalles;
-            //this.FechaCreacion = 
+            IdPresupuesto = id;
+            NombreDestinatario = nombre;
+            Detalle = detalles ?? new List<PresupuestoDetalle>();
+            FechaCreacion = DateTime.Now;
         }
-
-        public int GetIdProducto() => idProducto;
-        public string GetDestinatario() => nombreDestinatario;
-        public date GetFecha() => FechaCreacion;
-
 
 
         public double MontoPresupuesto()
         {
             float MontoTotal = 0;
-            foreach (var detalleindividual in detalle)
+            foreach (var detalleindividual in Detalle)
             {
-                MontoTotal += (detalleindividual.GetProducto().Precio()) * (detalleindividual.GetCantidad());
+                MontoTotal += (detalleindividual.Producto.Precio) * (detalleindividual.Cantidad);
             }
             return MontoTotal;
         }
+
+
         public double MontoPresupuestoConIva() //considerar iva 21
         {
             return MontoPresupuesto() * (1.21);
         }
+
+
         public int CantidadProductos() //contar total de productos (sumador de todas las cantidades del detalle)
         {
             int cantidad = 0;
 
-            foreach (var detalleindividual in detalle)
+            foreach (var detalleindividual in Detalle)
             {
-                cantidad += detalleindividual.GetCantidad();
+                cantidad += detalleindividual.Cantidad;
             }
 
             return cantidad;
