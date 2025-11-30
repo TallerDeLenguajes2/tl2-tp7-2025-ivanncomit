@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 
 namespace TPTDL2.Repositorys
 {
-    class ProductoRepository
+    public class ProductoRepository
     {
         private string connectionString = "Data Source=tienda.db";
         public void Alta (Producto productoaCrear)
@@ -28,8 +28,8 @@ namespace TPTDL2.Repositorys
             {
                 var command = new SqliteCommand(consulta, connection);
                 connection.Open();
-                command.Parameters.AddWithValue("@NuevaDescripcion", producto.GetDescripcion());
-                command.Parameters.AddWithValue("@NuevoPrecio", producto.GetPrecio());
+                command.Parameters.AddWithValue("@NuevaDescripcion", producto.Descripcion);
+                command.Parameters.AddWithValue("@NuevoPrecio", producto.Precio);
                 command.Parameters.AddWithValue("@idProd", idProducto);
                 
                 command.ExecuteNonQuery();
