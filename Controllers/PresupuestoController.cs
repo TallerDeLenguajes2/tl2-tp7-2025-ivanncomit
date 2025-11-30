@@ -30,7 +30,7 @@ namespace TPTDL2.Controllers
         }
 
         [HttpGet("ListarPresupuestos")]
-        public ActionResult<List<Presupuesto>> GetProductos()
+        public ActionResult<List<Presupuesto>> GetPresupuestos()
         {
             var lista = presupuestoRepository.ListarPresupuestos();
             return Ok(lista);
