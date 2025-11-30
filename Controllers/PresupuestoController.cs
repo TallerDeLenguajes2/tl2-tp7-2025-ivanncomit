@@ -16,7 +16,7 @@ namespace TPTDL2.Controllers
         }
 
         [HttpPost("AltaPresupuesto")]
-        public ActionResult<string> AltaProducto(Presupuesto nuevoPresupuesto)
+        public ActionResult<string> AltaPresupuesto(Presupuesto nuevoPresupuesto)
         {
             presupuestoRepository.CrearPresupuesto(nuevoPresupuesto);
             return Ok("Presupuesto creado exitosamente");
@@ -38,7 +38,7 @@ namespace TPTDL2.Controllers
         }
         [HttpGet("{id}")]
 
-        public ActionResult<Presupuesto> GetDetallesPresupuesto()
+        public ActionResult<Presupuesto> GetDetallesPresupuesto(int id)
         {   
             var presupuesto = presupuestoRepository.ObtenerPresupuestoID(id);
             
